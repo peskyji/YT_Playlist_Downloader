@@ -4,4 +4,4 @@
 
 A Streamlit app to Convert YuoTube Videos to .mp4 & .mp3 audio format.
 
-<img width="640" alt="screenshot" src="https://user-images.githubusercontent.com/7164864/141756801-172f3829-788b-4907-806f-f183c34090ad.png">
+<img width="640" alt="screenshot" src="https://github.com/peskyji/YT_Video2Audio/blob/6d055ad7e9c3bf3fde3810b01616749aaecc5186/screenshots/app_screenshot.jpg">
