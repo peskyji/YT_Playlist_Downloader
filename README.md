@@ -1,4 +1,4 @@
-[![Website](https://peskyji-yt-video2audio-streamlit-app-nkk4vf.streamlitapp.com/)
+[![Website](https://raw.githubusercontent.com/peskyji/Image_badge_icons/main/website.svg)](https://peskyji-yt-video2audio-streamlit-app-nkk4vf.streamlitapp.com/)
 <br>
 # 🎬 YT Video 2 Audio Converter
 
