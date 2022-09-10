@@ -1,3 +1,5 @@
+\U0001F3AC
+
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/streamlit/example-app-pdf-report/main)
 
 # 🎓 YT Video 2 Audio Converter
