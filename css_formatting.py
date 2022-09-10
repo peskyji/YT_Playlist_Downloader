@@ -26,7 +26,7 @@ custom_input_bar = '''<input type="text"
                         id="ip1"/>'''
 
 video_iframe = '''
-                    <center><iframe width="500" height="300"
+                    <center><iframe width="450" height="300"
                     src="{}"
                     title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
                     clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
