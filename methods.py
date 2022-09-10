@@ -40,21 +40,18 @@ def create_zip_folder_mp3(py7zr):
     except:
         pass
 
-def updating_progress_bar_while_downloading_audios(st, playlist, YouTube,py7zr, mp):
-    latest_iteration = st.empty()
-    bar = st.progress(0)
+def updating_progress_bar_while_downloading_audios(st, playlist, YouTube,py7zr, mp, time):
+    st.sidebar.info("Conversion is in progress\nKeep checking below for updates on progress")
+    time.sleep(3)
+    latest_iteration = st.sidebar.empty()
+    bar = st.sidebar.progress(0)
     unit_percentage_progress = 100/len(playlist)
     
     for i in range(0,100):
         tmp = YouTube(playlist[i]).streams.filter(only_audio=True).first().download().split("\\")[-1]
         with py7zr.SevenZipFile('YT_Playlist_mp4.7z', 'a') as archive:
             archive.write(tmp)
-        try:
-            st.write(f"{YouTube(playlist[i]).title} downloaded")
-        except:
-            st.write(f"{playlist.videos[i]} downloaded")
-            # Update the progress bar with each iteration.
-
+        
         new_file = mp.AudioFileClip(tmp)
         mp3_file = new_file.write_audiofile(tmp[0:-4]+".mp3")
         with py7zr.SevenZipFile('YT_Playlist_mp3.7z', 'a') as archive:
@@ -65,6 +62,13 @@ def updating_progress_bar_while_downloading_audios(st, playlist, YouTube,py7zr, 
 
         current_progress = (i+1)*unit_percentage_progress
         latest_iteration.text(f'{round(current_progress)}% {i+1} of {len(playlist)}')
+
+        try:
+            st.sidebar.info(f"Converted - {YouTube(playlist[i]).title}")
+        except:
+            st.sidebar.info(f"Converted - {playlist.videos[i]}")
+            # Update the progress bar with each iteration.
+
         if current_progress+unit_percentage_progress > 100:
             current_progress = 100
             latest_iteration.text(f'100% {len(playlist)} of {len(playlist)}')
@@ -78,41 +82,41 @@ def download_mp3_audio(st, py7zr):
     with open("YT_Playlist_mp3.7z", "rb") as download_playlist:
         with py7zr.SevenZipFile('YT_Playlist_mp3.7z', 'r') as zip:
             size = round(int(zip.archiveinfo().size)/1024, 2)
-            target_size = f"{round(size)} KB"
+            target_size = f"{round(size)}KB"
             if size // 1024 != 0:
                 size = round(size/1024, 2)
-                target_size = f"{round(size)} MB"
+                target_size = f"{round(size)}MB"
             if size // 1024 != 0:
                 size = round(size/1024, 2)
-                target_size = f"{round(size)} GB"
+                target_size = f"{round(size)}GB"
 
         with open("YT_Playlist_mp3.7z", "rb") as download_playlist:
             btn = st.download_button(
-                label=f"⬇️ MP3 {target_size}",
+                label=f"⬇️MP3 {target_size}",
                 data=download_playlist,
                 file_name="YT_Playlist_mp3.7z",
                 mime="application/x-7z-compressed"
             )
-            st.markdown(download_button_css_sidebar, unsafe_allow_html=True)
+            #st.markdown(download_button_css_main, unsafe_allow_html=True)
 
 def download_mp4_audio(st, py7zr):
     size, target_size = None, ""
     with open("YT_Playlist_mp4.7z", "rb") as download_playlist:
         with py7zr.SevenZipFile('YT_Playlist_mp4.7z', 'r') as zip:
             size = round(int(zip.archiveinfo().size)/1024, 2)
-            target_size = f"{round(size)} KB"
+            target_size = f"{round(size)}KB"
             if size // 1024 != 0:
                 size = round(size/1024, 2)
-                target_size = f"{round(size)} MB"
+                target_size = f"{round(size)}MB"
             if size // 1024 != 0:
                 size = round(size/1024, 2)
-                target_size = f"{round(size)} GB"
+                target_size = f"{round(size)}GB"
 
         with open("YT_Playlist_mp4.7z", "rb") as download_playlist:
             btn = st.download_button(
-                label=f"⬇️ MP4 {target_size}",
+                label=f"⬇️MP4 {target_size}",
                 data=download_playlist,
                 file_name="YT_Playlist_mp4.7z",
                 mime="application/x-7z-compressed"
             )
-            st.markdown(download_button_css_sidebar, unsafe_allow_html=True)
+            #st.markdown(download_button_css_main, unsafe_allow_html=True)

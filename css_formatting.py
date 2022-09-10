@@ -1,12 +1,12 @@
-sidebar_css = '''<style>
-                    [data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
-                        width: 400px;
-                    }
-                    [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {
-                        width: 400px;
-                        margin-left: -400px;
-                        }
-                </style>'''
+# sidebar_css = '''<style>
+#                     [data-testid="stSidebar"][aria-expanded="true"] > div:first-child {
+#                         width: 400px;
+#                     }
+#                     [data-testid="stSidebar"][aria-expanded="false"] > div:first-child {
+#                         width: 400px;
+#                         margin-left: -400px;
+#                         }
+#                 </style>'''
 
 custome_input_bar_top = ''' <style>
                     input {
@@ -26,11 +26,11 @@ custom_input_bar = '''<input type="text"
                         id="ip1"/>'''
 
 video_iframe = '''
-                    <iframe width="360" height="250" 
-                    src="{}" 
+                    <center><iframe width="500" height="300"
+                    src="{}"
                     title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
                     clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                    </iframe>
+                    </iframe></center>
                 '''
 
 
@@ -110,3 +110,23 @@ st_input_bar_top = ''' <style>
 
                     </style>
                     '''
+
+progress_result_sidebar_div = '''<style>
+                                    h1 {
+                                            color:Green;
+                                        }
+                                    div.scroll {
+                                        margin:4px, 4px;
+                                        padding:4px;
+                                        background-color: green;
+                                        width: 500px;
+                                        height: 110px;
+                                        overflow-x: hidden;
+                                        overflow-y: auto;
+                                        text-align:justify;
+                                    }
+                                </style>
+                                <div class="scroll">
+                                
+                                </div>
+                            '''
