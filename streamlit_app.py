@@ -42,5 +42,5 @@ if playlisturl!="":
 
     except Exception as e:
         #st.write("Something wrong with specified\directory. Exception- ", 
-        sys.exc_info())
+        sys.exc_info()
         st.exception(f"oops!!! something went wrong: {e}")
