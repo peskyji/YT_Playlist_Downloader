@@ -39,7 +39,8 @@ if playlisturl!="":
         #col1, col2 = st.columns(2)
         download_mp4_audio(col2, py7zr)
         download_mp3_audio(col2, py7zr)
+
     except Exception as e:
         #st.write("Something wrong with specified\directory. Exception- ", 
-        #sys.exc_info())
+        sys.exc_info())
         st.exception(f"oops!!! something went wrong: {e}")
