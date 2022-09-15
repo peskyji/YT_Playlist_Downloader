@@ -74,6 +74,9 @@ def updating_progress_bar_while_downloading_audios(st, playlist, YouTube,py7zr, 
             st.sidebar.info(f"Converted - {filename}")
             latest_iteration.text(f'100% 1 of 1')
             bar.progress(100)
+            
+        except VideoUnavailable as e:
+            st.sidebar.error("Sorry😔. This video is unavailable to download")
         except Exception as e:
             st.exception(e)
             st.stop()
