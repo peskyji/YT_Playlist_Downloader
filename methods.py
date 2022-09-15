@@ -59,7 +59,6 @@ def updating_progress_bar_while_downloading_audios(st, playlist, YouTube,py7zr, 
     '''
     
     filename = ""
-    st.sidebar.info("Conversion is in progress\nKeep checking below for updates on progress")
     time.sleep(1)
     latest_iteration = st.sidebar.empty()
     bar = st.sidebar.progress(0)
@@ -69,14 +68,15 @@ def updating_progress_bar_while_downloading_audios(st, playlist, YouTube,py7zr, 
         try:
             tmp = YouTube(playlist[0]).streams.filter(only_audio=True).first().download().split("\\")[-1]
             filename = tmp[:-4]
+            st.sidebar.info("Conversion is in progress\nKeep checking below for updates on progress")
+            new_file = mp.AudioFileClip(tmp)
+            new_file.write_audiofile(tmp[0:-4]+".mp3")
+            st.sidebar.info(f"Converted - {filename}")
+            latest_iteration.text(f'100% 1 of 1')
+            bar.progress(100)
         except Exception as e:
             st.exception(e)
             st.stop()
-        new_file = mp.AudioFileClip(tmp)
-        new_file.write_audiofile(tmp[0:-4]+".mp3")
-        st.sidebar.info(f"Converted - {filename}")
-        latest_iteration.text(f'100% 1 of 1')
-        bar.progress(100)
     else:
         for i in range(0,100):
             try:
