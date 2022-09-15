@@ -36,13 +36,11 @@ video_iframe = '''
 
 download_button_css_main = '''<style>
                     .css-ahw0vf{
-                        background: #05C3DD;
+                        background: rgb(0, 66, 128);
                         display: inline-flex;
-                        border-radius: 10rem;
-                        margin: 0px;
-                        line-height: 2.6;
+                        border-radius: 5em;
                         color: white;
-                        border: 3px solid #FFFFFF;
+                        border: 2px solid #FFFFFF;
                         }
                         </style>
                     '''
