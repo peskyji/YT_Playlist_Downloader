@@ -132,7 +132,7 @@ def download_mp3_audio(st, py7zr,filename=None):
        
         with open(filename,"rb") as f:
                 btn = st.download_button(
-                    label=f"🎸 MP4 {target_size}",
+                    label=f"🎸 MP3 {target_size}",
                     data=f,
                     file_name=filename,
                     mime="application/octet-stream"
