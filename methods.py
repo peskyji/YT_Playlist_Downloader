@@ -134,7 +134,7 @@ def download_mp3_audio(st, py7zr,filename=None):
                 btn = st.download_button(
                     label=f"🎸 MP3 {target_size}",
                     data=f,
-                    file_name=filename,
+                    file_name=filename[26:],
                     mime="application/octet-stream"
                 )
     else:
@@ -179,7 +179,7 @@ def download_mp4_audio(st, py7zr, filename=None):
                 btn = st.download_button(
                     label=f"🎸MP4 {target_size}",
                     data=f,
-                    file_name=filename,
+                    file_name=filename[26:],
                     mime="application/octet-stream"
                 )
     else:
