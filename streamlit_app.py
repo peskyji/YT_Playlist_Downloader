@@ -41,7 +41,7 @@ if playlisturl!="":
         time.sleep(3)
         st.balloons()
         st.markdown("</br>", unsafe_allow_html=True)
-        col1, col2 = st.columns(2)
+        _, _, col1, col2, _ = st.columns(5)
 
         if filename=="":
             download_mp4_audio(col1, py7zr)
