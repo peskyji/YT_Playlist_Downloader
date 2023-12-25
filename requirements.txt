@@ -1,4 +1,4 @@
-streamlit==1.12.2
-pytube==15.0.0
-moviepy==1.0.3
-py7zr==0.20.0
+streamlit
+pytube
+moviepy
+py7zr
