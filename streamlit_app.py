@@ -27,7 +27,7 @@ st.image("logo4.png")
 
 # 4) inserting text input button below the title
 c1, c2 = st.columns([6,4])
-playlisturl = c1.text_input("", key="playlisturl", placeholder="Enter Youtube Video/Playlist link here...")
+playlisturl = c1.text_input("", key="playlisturl", placeholder="Enter Youtube Video/Playlist link here...", label_visibility="hidden")
 c2.button("Reset", key="resetButton", on_click = reset_url)
 st.markdown(st_input_bar_top, unsafe_allow_html=True)
 if playlisturl!="":
