@@ -1,5 +1,7 @@
 from css_formatting import *
 import os
+import streamlit as st
+
 
 def create_custom_input_button(st):
     '''This Method adds CSS properties to Streamlit's st.text_input() button 
@@ -8,26 +10,26 @@ def create_custom_input_button(st):
     st.markdown(custom_input_bar,unsafe_allow_html=True)
     st.markdown(custome_input_bar_top,unsafe_allow_html=True)
 
-def check_input_url(playlisturl, YouTube, Playlist, st):
+def check_input_url(YouTube, Playlist, st):
     '''This method checks whether the entered URL is correct or not. URL entered will
        be passed into pytube's YouTube() method incase of single Youtube video or Playlist() 
        method in case of a Youtube Playlist 
     '''
     src = None
     playlist = list()
-    if "playlist" in playlisturl.lower():
+    if "playlist" in st.session_state.playlisturl.lower():
         try:
-            playlist = Playlist(playlisturl)
-            src = f"https://www.youtube.com/embed/videoseries?{playlisturl.split('?')[-1]}"
+            playlist = Playlist(st.session_state.playlisturl)
+            src = f"https://www.youtube.com/embed/videoseries?{st.session_state.playlisturl.split('?')[-1]}"
         except:
             st.image('oops3.jpg')
             # st.error("The URL you have entered does not exist. Please check & enter correct URL")
             st.stop()
     else:
         try:
-            yt = YouTube(playlisturl)
-            src = f"https://www.youtube.com/embed/{playlisturl.split('/')[-1]}"
-            playlist.append(playlisturl)
+            yt = YouTube(st.session_state.playlisturl)
+            src = f"https://www.youtube.com/embed/{st.session_state.playlisturl.split('/')[-1]}"
+            playlist.append(st.session_state.playlisturl)
         except:
             st.image('oops3.jpg')
             # st.error("The URL you have entered does not exist. Please check & enter correct URL")
@@ -80,12 +82,13 @@ def updating_progress_bar_while_downloading_audios(st, playlist, YouTube,py7zr, 
                 st.sidebar.error("Sorry😔. This video is unavailable to download")
             st.stop()
     else:
-        for i in range(0,100):
+        for i in range(0,len(playlist)):
             try:
                 tmp = YouTube(playlist[i]).streams.filter(only_audio=True).first().download().split("\\")[-1]
             except Exception as e:
-                st.exception(e)
-                st.stop()
+                continue
+                # st.exception(e)
+                # st.stop()
 
             with py7zr.SevenZipFile('YT_Playlist_mp4.7z', 'a') as archive:
                 archive.write(tmp)
@@ -112,6 +115,9 @@ def updating_progress_bar_while_downloading_audios(st, playlist, YouTube,py7zr, 
                 bar.progress(round(current_progress))
     return filename
     
+def reset_url():
+    st.session_state.playlisturl = ""
+
 def download_mp3_audio(st, py7zr,filename=None):
     '''this method reads the converted mp3 playlist(zip file) / or single mp3 audio file
        calculate the size for that file and create a download button for user to download
@@ -135,7 +141,8 @@ def download_mp3_audio(st, py7zr,filename=None):
                     label=f"🎸 MP3 {target_size}",
                     data=f,
                     file_name=filename[26:],
-                    mime="application/octet-stream"
+                    mime="application/octet-stream",
+                    on_click = reset_url
                 )
     else:
         with open("YT_Playlist_mp3.7z", "rb") as download_playlist:
@@ -154,7 +161,8 @@ def download_mp3_audio(st, py7zr,filename=None):
                     label=f"📁 MP3 {target_size}",
                     data=download_playlist,
                     file_name="YT_Playlist_mp3.7z",
-                    mime="application/x-7z-compressed"
+                    mime="application/x-7z-compressed",
+                    on_click = reset_url
                 )
                 st.markdown(download_button_css_main, unsafe_allow_html=True) 
 
@@ -180,7 +188,8 @@ def download_mp4_audio(st, py7zr, filename=None):
                     label=f"🎸MP4 {target_size}",
                     data=f,
                     file_name=filename[26:],
-                    mime="application/octet-stream"
+                    mime="application/octet-stream",
+                    on_click = reset_url
                 )
     else:
         with open("YT_Playlist_mp4.7z", "rb") as download_playlist:
@@ -199,6 +208,7 @@ def download_mp4_audio(st, py7zr, filename=None):
                     label=f"📁 MP4 {target_size}",
                     data=download_playlist,
                     file_name="YT_Playlist_mp4.7z",
-                    mime="application/x-7z-compressed"
+                    mime="application/x-7z-compressed",
+                    on_click = reset_url
                 )
                 st.markdown(download_button_css_main, unsafe_allow_html=True)
