@@ -11,6 +11,9 @@ import time
 st.set_page_config(layout="centered", page_icon="\U0001F3AC",
                     page_title="YT Video2Audio Converter",
                     )
+
+if "playlisturl" not in st.session_state:
+    st.session_state.playlisturl = ""
 # 2) displaying Web site logo on left sidebar
 with st.sidebar:
     st.image("logo1.jpg")
@@ -26,7 +29,7 @@ st.image("logo4.png")
 playlisturl = st.text_input("", key="playlisturl", placeholder="Enter Youtube Video/Playlist link here...")
 st.markdown(st_input_bar_top, unsafe_allow_html=True)
 if playlisturl!="":
-    playlist, src = check_input_url(playlisturl, YouTube, Playlist, st)
+    playlist, src = check_input_url(YouTube, Playlist, st)
     
     try:
         create_zip_folder_mp4(py7zr)
