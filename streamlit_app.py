@@ -34,25 +34,21 @@ if playlisturl!="":
     try:
         create_zip_folder_mp4(py7zr)
         create_zip_folder_mp3(py7zr)
-        col1, col2 = st.columns([7,3])
-        col1.markdown(video_iframe.format(src), unsafe_allow_html=True)
+        st.markdown(video_iframe.format(src), unsafe_allow_html=True)
         filename = updating_progress_bar_while_downloading_audios(st, playlist, YouTube, py7zr, mp, time)
         #st.write(filename)
         #st.success("🥳🎉Your Playlist is ready🥳🎉 download👇👇👇")
         time.sleep(3)
         st.balloons()
         st.markdown("</br>", unsafe_allow_html=True)
+        col1, col2 = st.columns([7,3])
+
         if filename=="":
-            download_mp4_audio(col2, py7zr)
-        else:
-            download_mp4_audio(col2, py7zr, filename+".mp4")
-        if filename=="":
-            #st.write("filename not empty")
+            download_mp4_audio(col1, py7zr)
             download_mp3_audio(col2, py7zr)
         else:
-            #st.write("filename empty")
+            download_mp4_audio(col1, py7zr, filename+".mp4")
             download_mp3_audio(col2, py7zr, filename+".mp3")
-
 
     except Exception as e:
         #st.write("Something wrong with specified\directory. Exception- ", 
